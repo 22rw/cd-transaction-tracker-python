@@ -36,17 +36,17 @@ if __name__ == '__main__':
         str(date.today())
     )
 
-    for transaction in transactions['values']: 
-        print(
-            'remitter: '
-            + str(transaction['remitter']) 
-            + ' | debtor: ' 
-            + str(transaction['debtor'])
-            + ' | creditor: '
-            + str(transaction['creditor'])
-            + ' | amount: '
-            + str(transaction['amount'])
-        )
+    for transaction in transactions['values']:
+        target = ''
+        if 'remitter' in transaction and transaction['remitter'] != None:
+            target = ' remitter: ' + str(transaction['remitter'])
+        elif 'debtor' in transaction and transaction['debtor'] != None:
+            target = ' debtor: ' + str(transaction['debtor'])
+        elif 'creditor' in transaction and transaction['creditor'] != None:
+            target = ' creditor: ' + str(transaction['creditor'])
+        
+        print((target + ' | ' if target is not None or '' else '') + 'amount: ' + str(transaction['amount']))
+        print('\n')
 
     input('Press ENTER to exit...')
 
